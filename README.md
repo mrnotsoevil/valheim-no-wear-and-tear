@@ -8,7 +8,7 @@ A simple mod that allows you to change following behaviours:
 
 ## Installation
 
-1. Install [Valheim ](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/)
+1. Install [Valheim BepInEx](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/)
 2. Copy `valheim_no_wear_and_tear.dll` (in the ZIP file) into `Valheim/BepInEx/plugins`
 3. Copy `de.mrnotsoevil.valheim.no-wear-and-tear.cfg` (in the ZIP file and also down below) into `Valheim/BepInEx/config` (Optional; this file is created on starting the game)
 
