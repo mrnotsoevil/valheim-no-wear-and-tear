@@ -21,7 +21,7 @@ namespace valheim_no_wear_and_tear
         {
             configEnableWear = Config.Bind("General", "EnableWear", true,
                 "If enabled, exposed structures are damaged over time.");
-            configEnableWearVisualization = Config.Bind("General", "EnableWearVisualization", true,
+            configEnableWearVisualization = Config.Bind("General", "EnableWearVisualization", false,
                 "If enabled, exposed structures will be displayed as 'worn' over time.");
             configEnableStructuralIntegrity = Config.Bind("General", "EnableStructuralIntegrity", true,
                 "If enabled, structures are checked for their integrity.");

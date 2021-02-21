@@ -6,7 +6,7 @@ namespace valheim_no_wear_and_tear
     [HarmonyPatch(typeof(WearNTear), "SetHealthVisual")]
     public class WearVisualizationPatch
     {
-        static void Postfix(float health, bool triggerEffects, GameObject ___m_worn, GameObject ___m_new, GameObject ___m_broken)
+        static void Postfix(float health, GameObject ___m_worn, GameObject ___m_new, GameObject ___m_broken)
         {
             if (health >= 0.5f && health <= 0.75)
             {
