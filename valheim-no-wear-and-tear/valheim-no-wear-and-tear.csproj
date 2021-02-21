@@ -63,6 +63,7 @@
         <Compile Include="ValheimNoWearAndTearPlugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="WearPatch.cs" />
+        <Compile Include="WearVisualizationPatch.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
