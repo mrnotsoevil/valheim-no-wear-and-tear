@@ -6,4 +6,7 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csrc_005Cvalheim_002Dno_002Dwear_002Dand_002Dtear_005Cvalheim_002Dno_002Dwear_002Dand_002Dtear_005Clibs_005CUnityEngine_002ECoreModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csrc_005Cvalheim_002Dno_002Dwear_002Dand_002Dtear_005Cvalheim_002Dno_002Dwear_002Dand_002Dtear_005Clibs_005CUnityEngine_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csrc_005Cvalheim_002Dno_002Dwear_002Dand_002Dtear_005Cvalheim_002Dno_002Dwear_002Dand_002Dtear_005Clibs_005CUnityEngine_002EPhysicsModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="D:\src\valheim-no-wear-and-tear\valheim-no-wear-and-tear\libs\assembly_valheim.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Valheim/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

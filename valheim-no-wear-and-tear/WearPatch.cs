@@ -6,20 +6,32 @@ namespace valheim_no_wear_and_tear
     [HarmonyPatch(typeof(WearNTear), "UpdateWear")]
     public class WearPatch
     {
+        private static readonly MethodInfo ShouldUpdateMethod =
+            typeof(WearNTear).GetMethod("ShouldUpdate", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo GetMaterialPropertiesMethod = typeof(WearNTear).GetMethod("GetMaterialProperties",
+        BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo HaveRoofMethod =
+            typeof(WearNTear).GetMethod("HaveRoof", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo UpdateSupportMethod = typeof(WearNTear).GetMethod("UpdateSupport",
+            BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo HaveSupportMethod =
+            typeof(WearNTear).GetMethod("HaveSupport", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo CanRemoveMethod =
+            typeof(WearNTear).GetMethod("CanBeRemoved", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo UpdateVisualMethod =
+            typeof(WearNTear).GetMethod("UpdateVisual", BindingFlags.NonPublic | BindingFlags.Instance);
+
         static bool Prefix(WearNTear __instance, ZNetView ___m_nview, ref float ___m_support)
         {
             if (!___m_nview.IsValid())
                 return false;
-            var shouldUpdateMethod =
-                typeof(WearNTear).GetMethod("ShouldUpdate", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (___m_nview.IsOwner() && (bool) shouldUpdateMethod.Invoke(__instance, new object[0]))
+            if (___m_nview.IsOwner() && (bool) ShouldUpdateMethod.Invoke(__instance, new object[0]))
             {
                 if (ZNetScene.instance.OutsideActiveArea(__instance.transform.position))
                 {
-                    var methodInfo = typeof(WearNTear).GetMethod("GetMaterialProperties",
-                        BindingFlags.NonPublic | BindingFlags.Instance);
+                    // Max support if outside active area
                     object[] result = new object[4];
-                    methodInfo.Invoke(__instance, result);
+                    GetMaterialPropertiesMethod.Invoke(__instance, result);
                     float maxSupport = (float) result[0];
                     ___m_support = maxSupport;
                     ___m_nview.GetZDO().Set("support", ___m_support);
@@ -27,30 +39,23 @@ namespace valheim_no_wear_and_tear
                 }
 
                 float damage = 0.0f;
+                bool hasRoof = (bool)HaveRoofMethod.Invoke(__instance, new object[0]);
+                bool isWet = EnvMan.instance.IsWet() && !hasRoof;
                 if ((bool) __instance.m_wet)
-                    __instance.m_wet.SetActive(false);
+                    __instance.m_wet.SetActive(isWet);
                 if (__instance.m_noSupportWear)
                 {
-                    var updateSupportMethod = typeof(WearNTear).GetMethod("UpdateSupport",
-                        BindingFlags.NonPublic | BindingFlags.Instance);
-                    var haveSupportMethod =
-                        typeof(WearNTear).GetMethod("HaveSupport", BindingFlags.NonPublic | BindingFlags.Instance);
-                    updateSupportMethod.Invoke(__instance, new object[0]);
-                    if (!(bool) haveSupportMethod.Invoke(__instance, new object[0]))
+                    UpdateSupportMethod.Invoke(__instance, new object[0]);
+                    if (!(bool) HaveSupportMethod.Invoke(__instance, new object[0]))
                         damage = 100f;
                 }
-
-                var canBeRemovedMethod =
-                    typeof(WearNTear).GetMethod("CanBeRemoved", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (damage > 0.0 && !(bool) canBeRemovedMethod.Invoke(__instance, new object[0]))
+                if (damage > 0.0 && !(bool) CanRemoveMethod.Invoke(__instance, new object[0]))
                     damage = 0.0f;
                 if (damage > 0.0)
                     __instance.ApplyDamage(damage / 100f * __instance.m_health);
             }
-
-            var updateVisualMethod =
-                typeof(WearNTear).GetMethod("UpdateVisual", BindingFlags.NonPublic | BindingFlags.Instance);
-            updateVisualMethod.Invoke(__instance, new object[] {true});
+            
+            UpdateVisualMethod.Invoke(__instance, new object[] {true});
             return false;
         }
     }
